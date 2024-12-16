@@ -1,0 +1,460 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Work Sans", sans-serif;
+}
+
+body {
+    background: #f5f5f5;
+    min-height: 100vh;
+    overflow-x: hidden;
+    font-family: -apple-system;
+}
+
+h2{
+    font-family: "Work Sans", sans-serif;
+    text-align: center;
+}
+
+p {
+    font-family: "Work Sans", sans-serif;
+    text-align: justify;
+}
+
+/* Overlay for information window */
+.info-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); 
+    display: none; 
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; 
+}
+
+.info-content {
+    background: white;
+    padding: 2vh 3vw;
+    border-radius: 1vw;
+    width: 60vw;
+    max-width: 80vw;
+    text-align: center;
+    position: relative; 
+}
+
+.info-content h2 {
+    font-size: 2.5vw;
+    margin-bottom: 1.5vh;
+}
+
+.info-content p {
+    font-size: 1.5vw;
+    margin-bottom: 2vh;
+}
+
+/* Close Button Style inside the info-content */
+.close-info-btn {
+    position: absolute;
+    top: 0.5vh; 
+    right: 1.3vh; 
+    background: none;
+    border: none;
+    font-size: 2vw;
+    cursor: pointer;
+    color: #333;
+    z-index: 2000; 
+}
+
+.close-info-btn:hover {
+    color: black;
+}
+
+/* Info Button Style (at the bottom-left) */
+.info-btn {
+    position: fixed;
+    bottom: 2vh; 
+    left: 3vw; 
+    width: 3.5vw;
+    height: 3.5vw;
+    background-color: #2e2e2e;
+    color: white;
+    border-radius: 50%; 
+    border: none;
+    font-size: 2vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 200;
+    box-shadow: 0 0.4vh 1.2vh rgba(0, 0, 0, 0.1);
+    opacity: 85%;
+}
+
+.info-btn:hover {
+    background-color: #878787;
+}
+
+.open-add-tab-btn {
+    position: fixed;
+    top: 2vh;
+    right: 5vw;
+    width: 3.5vw;
+    height: 3.5vw;
+    background-color: #2e2e2e;
+    color: white;
+    border-radius: 50%;
+    border: none;
+    font-size: 2vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 200;
+    box-shadow: 0 0.4vh 1.2vh rgba(0, 0, 0, 0.1);
+    opacity: 85%;
+}
+
+.open-add-tab-btn:hover {
+    background-color: #878787;
+}
+
+.container {
+    padding: 1vh;
+}
+
+#tabsContainer {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: center; 
+    transform-origin: center; 
+    transition: transform 0.5s ease; 
+    padding-right: 0.3vw;
+}
+
+.tab-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center; 
+    margin-bottom: -1vh;
+    padding-right: 2.5vw;
+    width: 100%; 
+    gap: 0.3vw;
+}
+
+.tab {
+    background: linear-gradient(to bottom, #f8f8f8, #e8e8e8);
+    border: 0.1vh solid #ccc;
+    border-radius: 1vw 1vw 0 0;
+    padding: 0.5vh 3vw 0.5vh 1vw;
+    font-size: 1.2vh;
+    height: 3vh;
+    position: relative;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 16vw;
+    min-width: 10vw;
+    margin-right: -3vw;
+    margin-bottom: 1vh;
+    transition: all 0.2s ease;
+    color: #333;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.5vw;
+    text-decoration: none;
+}
+
+.tab:hover {
+    background: linear-gradient(to bottom, #fff, #f0f0f0);
+    z-index: 2;
+    transform: scale(1.05);
+    margin-right: 0;
+    box-shadow: 0 0.2vh 0.5vh rgba(0,0,0,0.1);
+}
+
+.tab .favicon {
+    width: 1.6vw;
+    height: 1.6vh;
+    flex-shrink: 0;
+}
+
+.tab .title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.tab .transform-text {
+    display: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.tab:hover .title {
+    display: inline;
+}
+
+/* Removed the .transform-text display logic */
+.tab:hover .transform-text {
+    display: none;
+}
+
+.tab .close {
+    position: absolute;
+    right: 0.8vw;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1.6vw;
+    height: 1.6vh;
+    border-radius: 50%;
+    background: #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2vh;
+    opacity: 0;
+    transition: opacity 0.2s;
+    z-index: 3;
+}
+
+.tab:hover .close {
+    opacity: 1;
+}
+
+.tab-screenshot {
+    display: none; 
+}
+
+.close:hover {
+    background: #999;
+}
+
+.open-add-tab-btn {
+    position: fixed;
+    top: 2vh;
+    right: 5vw;
+    width: 3.5vw;
+    height: 3.5vw;
+    background-color: #2e2e2e;
+    color: white;
+    border-radius: 50%;
+    border: none;
+    font-size: 2vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 200;
+    box-shadow: 0 0.4vh 1.2vh rgba(0, 0, 0, 0.1);
+    opacity: 85%;
+}
+
+.open-add-tab-btn:hover {
+    background-color: #878787;
+}
+
+/* Style for the X button inside the add-tab div */
+.add-tab .close-btn {
+    position: absolute;
+    top: -1vh; 
+    right: 0; 
+    font-size: 1.5vw;
+    color: #333;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.add-tab .close-btn:hover {
+    color: black;
+}
+
+/* Initially hide the add-tab div */
+.add-tab {
+    position: fixed;
+    bottom: 2vh;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 3vh;
+    background: white;
+    border-radius: 1.2vw;
+    box-shadow: 0 0.4vh 1.2vh rgba(0,0,0,0.1);
+    width: 90vw;
+    max-width: 50vw;
+    z-index: 100;
+    display: none; 
+}
+
+.add-tab input {
+    width: 100%;
+    padding: 1vh;
+    border: 0.1vh solid #ddd;
+    border-radius: 0.6vw;
+    margin-bottom: 1vh;
+}
+
+.screenshot-upload {
+    margin-bottom: 1vh;
+    text-align: center;
+}
+
+.screenshot-preview {
+    max-width: 100%;
+    max-height: 20vh;
+    margin-top: 1vh;
+    border-radius: 0.6vw;
+}
+
+.add-tab button {
+    background: #2e2e2e;
+    color: white;
+    border: none;
+    padding: 1vh 2vw;
+    border-radius: 0.6vw;
+    cursor: pointer;
+}
+
+.minimal-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #E3F2FD, #BBDEFB);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s;
+}
+
+.minimal-screen.visible {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.minimal-screen h1 {
+    font-size: 4vh;
+    color: #1A237E;
+    margin-bottom: 1vh;
+}
+
+.minimal-screen p {
+    font-size: 1.2vh;
+    color: #303F9F;
+}
+
+.restart-btn {
+    background: #1A237E;
+    color: white;
+    border: none;
+    padding: 1.2vh 2.4vw;
+    border-radius: 0.6vw;
+    cursor: pointer;
+    margin-top: 2vh;
+    font-size: 1vh;
+}
+
+.print-btn {
+    position: fixed;
+    top: 2vh;           
+    left: 3vw;          
+    width: 4vw;         
+    height: 4vw;        
+    background-color: #2e2e2e;
+    color: white;
+    border-radius: 50%; 
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 200;
+    box-shadow: 0 0.4vh 1.2vh rgba(0, 0, 0, 0.1);
+    opacity: 85%;
+}
+
+.print-btn:hover {
+    background-color: #878787;
+}
+
+.print-btn:focus {
+    outline: none;
+}
+
+.print-btn .material-icons {
+    font-size: 2.5vw;   /* Adjust size of the print icon */
+    margin: 0;
+}
+
+/* Customize Button Style */
+.customize-btn {
+    position: fixed;
+    bottom: 2vh; 
+    right: 3vw; 
+    width: 4vw;
+    height: 4vw;
+    background-color: #2e2e2e;
+    color: white;
+    border-radius: 50%;
+    border: none;
+    font-size: 2vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 200;
+    box-shadow: 0 0.4vh 1.2vh rgba(0, 0, 0, 0.1);
+    opacity: 85%;
+}
+
+.customize-btn:hover {
+    background-color: #878787;
+}
+
+.customize-btn .material-icons {
+    font-size: 2vw;   
+    margin: 0;
+}
+
+.refresh-btn {
+    position: fixed;
+    bottom: 2vh;
+    right: 3vw; 
+    width: 4vw;
+    height: 4vw;
+    background-color: #2e2e2e;
+    color: white;
+    border-radius: 50%;
+    border: none;
+    font-size: 2vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 200;
+    box-shadow: 0 0.4vh 1.2vh rgba(0, 0, 0, 0.1);
+    opacity: 85%;
+}
+
+.refresh-btn:hover {
+    background-color: #878787;
+}
+
+.refresh-btn .material-icons {
+    font-size: 2vw;
+    margin: 0;
+}

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tabs Manager</title>
+
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="main.js" defer></script>
+  </head>
+  <body>
+    <!-- Information Overlay Modal -->
+    <div id="infoOverlay" class="info-overlay">
+      <div class="info-content">
+        <button class="close-info-btn" onclick="toggleInfoOverlay()">×</button>
+        <h2>(Tabs Manager, 2024)</h2>
+        <p>
+          is a digital tool designed to transform the common phenomenon of tab
+          hoarding into an organized and purposeful citation system. Inspired by
+          the universal experience of accumulating countless open tabs—each
+          representing tasks, ideas, or interests—this tool bridges the gap
+          between digital browsing and meaningful information management.
+        </p>
+        <p>
+          With Tabs Manager, users can generate printable archive documents of
+          their saved tabs. Each document includes screenshots of the tab
+          contents along with detailed reference information, ensuring that no
+          task, curiosity, or idea is lost to the chaos of modern browsing. This
+          feature allows users to preserve their digital findings as a physical
+          or digital reference, transforming rapid online explorations into
+          lasting, actionable resources.
+        </p>
+        <p>
+          Developed from the project in Web to Print class at California College
+          of the Arts (CCA) for Fall 2024, Tabs Manager redefines how we
+          interact with and preserve digital information, turning tabs into
+          lasting resources for productivity and creativity.
+        </p>
+      </div>
+    </div>
+
+    <!-- Information Button at the bottom-left -->
+    <button class="info-btn" onclick="toggleInfoOverlay()">i</button>
+
+    <div class="container">
+      <div id="tabsContainer"></div>
+    </div>
+
+    <div class="add-tab" id="addTab">
+      <button class="close-btn" onclick="toggleAddTab()">×</button>
+      <input
+        type="text"
+        id="newTabInput"
+        placeholder="Add your own tab by inserting your link here..."
+      />
+      <input
+        type="datetime-local"
+        id="dateAccessInput"
+        placeholder="Date and Time of Access"
+      />
+      <div class="screenshot-upload">
+        <input
+          type="file"
+          id="screenshotInput"
+          accept="image/*"
+          onchange="previewScreenshot(event)"
+        />
+        <img
+          id="screenshotPreview"
+          class="screenshot-preview"
+          src=""
+          alt="Screenshot Preview"
+          style="display: none"
+        />
+      </div>
+      <button onclick="addNewTab()">Add Tab</button>
+    </div>
+    <button class="open-add-tab-btn" onclick="toggleAddTab()">+</button>
+
+    <button class="print-btn" onclick="printCatalog()">
+      <span class="material-icons">print</span>
+    </button>
+
+    <button class="refresh-btn" onclick="location.reload()">
+      <span class="material-icons">refresh</span>
+    </button>
+  </body>
+</html>
